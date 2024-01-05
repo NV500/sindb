@@ -1,75 +1,42 @@
-// Datos simulados para pruebas (sin Firebase)
+
+// Your Firebase configuration
+const firebaseConfig = {
+    ,
+    authDomain: "sin-fb.firebaseapp.com",
+    projectId: "sin-fb",
+    storageBucket: "sin-fb.appspot.com",
+    messagingSenderId: "279774903950",
+    appId: "1:279774903950:web:899adb720e51bfeed693df",
+    measurementId: "G-W6SDCJ14YT"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 let models = [];
 
 function addModel() {
-    const modelName = document.getElementById('modelName').value;
-    const brand = document.getElementById('brand').value;
-    const year = document.getElementById('year').value;
-    const price = document.getElementById('price').value;
-    const releaseDate = document.getElementById('releaseDate').value;
-
-    if (modelName && brand && year && price && releaseDate) {
-        const newModel = {
-            modelName: modelName,
-            brand: brand,
-            year: year,
-            price: price,
-            releaseDate: releaseDate
-        };
-
-        models.push(newModel);
-        displayModels();
-        clearForm();
-    } else {
-        alert('Por favor, complete todos los campos.');
-    }
+    // ... (rest of your existing code)
 }
 
 function displayModels() {
-    const carList = document.getElementById('carList');
-    carList.innerHTML = '';
-
-    models.forEach((model, index) => {
-        const modelItem = document.createElement('div');
-        modelItem.classList.add('model-item');
-        modelItem.innerHTML = `
-            <strong>${model.modelName}</strong> (${model.brand})
-            <p>Año: ${model.year}</p>
-            <p>Precio: $${model.price}</p>
-            <p>Lanzamiento: ${model.releaseDate}</p>
-            <button onclick="editModel(${index})">Editar</button>
-            <button onclick="deleteModel(${index})">Eliminar</button>
-        `;
-        carList.appendChild(modelItem);
-    });
+    // ... (rest of your existing code)
 }
 
-function editModel(index) {
-    // Obtén el modelo actual para prellenar el formulario de edición
-    const currentModel = models[index];
+function signInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
 
-    // Llena el formulario con los datos actuales del modelo
-    document.getElementById('modelName').value = currentModel.modelName;
-    document.getElementById('brand').value = currentModel.brand;
-    document.getElementById('year').value = currentModel.year;
-    document.getElementById('price').value = currentModel.price;
-    document.getElementById('releaseDate').value = currentModel.releaseDate;
-
-    // Elimina el modelo actual de la lista para evitar duplicados al editar
-    models.splice(index, 1);
-
-    // Muestra la lista actualizada
-    displayModels();
+    firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+            // The user has signed in with Google
+            const user = result.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            // Handle errors
+            console.error(error);
+        });
 }
 
-function deleteModel(index) {
-    models.splice(index, 1);
-    displayModels();
-}
-
-function clearForm() {
-    document.getElementById('carForm').reset();
-}
-
-// Llamar a displayModels() al cargar la página para mostrar la lista inicial
-document.addEventListener('DOMContentLoaded', displayModels);
+// ... (rest of your existing code)
