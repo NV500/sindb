@@ -1,7 +1,11 @@
+// Importa las funciones necesarias del SDK de Firebase
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-// Your Firebase configuration
+// Tu configuración de Firebase
 const firebaseConfig = {
-    ,
+    apiKey: "AIzaSyAoJdeT736PxYZAZeVuDGIJfugkMgFxx4E",
     authDomain: "sin-fb.firebaseapp.com",
     projectId: "sin-fb",
     storageBucket: "sin-fb.appspot.com",
@@ -10,33 +14,46 @@ const firebaseConfig = {
     measurementId: "G-W6SDCJ14YT"
 };
 
-// Initialize Firebase
+// Inicializa Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
 
 let models = [];
 
 function addModel() {
-    // ... (rest of your existing code)
+    // ... (resto de tu código existente)
 }
 
 function displayModels() {
-    // ... (rest of your existing code)
+    // ... (resto de tu código existente)
 }
 
 function signInWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    firebase.auth().signInWithPopup(provider)
+    signInWithPopup(auth, provider)
         .then((result) => {
-            // The user has signed in with Google
+            // El usuario ha iniciado sesión con Google
             const user = result.user;
             console.log(user);
         })
         .catch((error) => {
-            // Handle errors
+            // Manejar errores
             console.error(error);
         });
 }
 
-// ... (rest of your existing code)
+function editModel(index) {
+    // ... (resto de tu código existente)
+}
+
+function deleteModel(index) {
+    // ... (resto de tu código existente)
+}
+
+function clearForm() {
+    // ... (resto de tu código existente)
+}
+
+// Llama a displayModels() al cargar la página para mostrar la lista inicial
+document.addEventListener('DOMContentLoaded', displayModels);
