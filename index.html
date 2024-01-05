@@ -31,6 +31,9 @@
                 <label for="releaseDate">Fecha de Lanzamiento:</label>
                 <input type="date" id="releaseDate" required>
 
+                <!-- Botón para iniciar sesión con Google -->
+                <button type="button" onclick="signInWithGoogle()">Iniciar sesión con Google</button>
+
                 <button type="button" onclick="addModel()">Agregar Modelo</button>
             </form>
         </section>
@@ -42,6 +45,8 @@
         </section>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
