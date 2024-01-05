@@ -1,8 +1,3 @@
-// Importa las funciones necesarias del SDK de Firebase
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
 // Tu configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyAoJdeT736PxYZAZeVuDGIJfugkMgFxx4E",
@@ -15,10 +10,9 @@ const firebaseConfig = {
 };
 
 // Inicializa Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth();
-const provider = new GoogleAuthProvider();
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
 
 let models = [];
 
@@ -31,15 +25,15 @@ function displayModels() {
 }
 
 function signInWithGoogle() {
-    signInWithPopup(auth, provider)
+    firebase.auth().signInWithPopup(provider)
         .then((result) => {
             // El usuario ha iniciado sesión con Google
             const user = result.user;
-            console.log(user);
+            console.log("Usuario autenticado:", user);
         })
         .catch((error) => {
             // Manejar errores
-            console.error(error);
+            console.error("Error al iniciar sesión con Google:", error);
         });
 }
 
